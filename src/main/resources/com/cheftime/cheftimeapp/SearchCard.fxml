@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="contentPane" maxHeight="200.0" maxWidth="500.0" minHeight="200.0" minWidth="500.0" prefHeight="200.0" prefWidth="500.0" style="-fx-background-radius: 12; -fx-background-color: #FF9800;" stylesheets="@../../../style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cheftime.cheftimeapp.controllers.SearchCardController">
+   <children>
+      <ImageView fx:id="imageView" fitHeight="200.0" fitWidth="180.0" pickOnBounds="true" preserveRatio="true">
+         <viewport>
+            <Rectangle2D height="200.0" minX="90.0" minY="30.0" width="180.0" />
+         </viewport></ImageView>
+      <Rectangle arcHeight="5.0" fill="#ff9800" height="200.0" layoutX="160.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="20.0" />
+      <Group layoutX="118.0" layoutY="117.0">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#124939" height="65.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 65; -fx-arc-width: 65;" width="360.0" />
+            <Text fx:id="caloriesText" fill="#d9edbf" layoutX="29.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1200 kcal" wrappingWidth="79.0" />
+            <Button fx:id="viewRecipeButton" alignment="CENTER" contentDisplay="RIGHT" layoutX="220.0" layoutY="13.0" mnemonicParsing="false" onAction="#handleButtonClick" prefHeight="38.0" style="-fx-background-color: none;" text="Chef Time" textFill="#ff9800">
+               <graphic>
+                  <ImageView fitHeight="39.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/arrow-orange.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Button>
+            <VBox layoutX="129.0" layoutY="7.0" prefHeight="46.0" prefWidth="64.0">
+               <children>
+                  <Text fx:id="proteinText" fill="#d9edbf" strokeType="OUTSIDE" strokeWidth="0.0" text="• Protein x" wrappingWidth="79.0" />
+                  <Text fx:id="carbText" fill="#d9edbf" strokeType="OUTSIDE" strokeWidth="0.0" text="• Carb x" wrappingWidth="79.0" />
+                  <Text fx:id="fatText" fill="#d9edbf" strokeType="OUTSIDE" strokeWidth="0.0" text="• Fat x" wrappingWidth="79.0" />
+               </children>
+            </VBox>
+         </children>
+      </Group>
+      <VBox alignment="CENTER_LEFT" layoutX="187.0" layoutY="38.0" prefHeight="74.0" prefWidth="282.0">
+         <children>
+            <Text fx:id="titleText" fill="#124939" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-line-spacing: -8px;" text="Recipae TitleRecipe TitleRecipe Title" wrappingWidth="270.0" />
+         </children>
+      </VBox>
+      <Text fx:id="infoText" fill="#124939" layoutX="187.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="x servings • Ready in x minutes" wrappingWidth="282.0" />
+   </children>
+</AnchorPane>
