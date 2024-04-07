@@ -55,13 +55,13 @@ public class MainController {
     private ScrollPane resultScrollPane;
 
     @FXML
-    public StackPane messageContainer;
+    private StackPane messageContainer;
 
     @FXML
     private Text message;
 
     @FXML
-    public VBox resultVBox;
+    private VBox resultVBox;
 
     private List<Recipe> searchResults = new ArrayList<>();
 

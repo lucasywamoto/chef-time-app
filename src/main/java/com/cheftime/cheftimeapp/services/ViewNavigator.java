@@ -41,7 +41,6 @@ public class ViewNavigator {
         Parent mainViewPane = loader.load();
         MainController mainController = loader.getController();
         mainController.displaySearchResults();
-//        mainController.resultVBox.getChildren().remove(mainController.messageContainer);
 
         Scene mainViewScene = new Scene(mainViewPane);
         mainViewScene.getStylesheets().add("style.css");
