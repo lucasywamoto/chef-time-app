@@ -7,12 +7,6 @@
     -fx-faint-focus-color: transparent;
 }
 
-#rootPane {
-    -fx-background-image: url('images/background.png');
-    -fx-background-repeat: repeat;
-    -fx-background-size: 400px 400px;
-}
-
 ScrollPane .viewport {
     -fx-background-color: transparent;
 }
@@ -24,6 +18,11 @@ Button {
 
 Text {
     -fx-font-family: 'Poppins Light';
+}
+
+#initialSentence {
+    -fx-font-family: 'Poppins Light';
+    -fx-font-size: 18px;
 }
 
 #titleText {

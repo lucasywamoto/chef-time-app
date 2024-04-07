@@ -10,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.util.Duration;
 
 import java.io.IOException;
@@ -53,6 +54,9 @@ public class MainController {
     private ScrollPane resultScrollPane;
 
     @FXML
+    private Text initialSentence;
+
+    @FXML
     private VBox resultVBox;
 
     private List<Recipe> searchResults = new ArrayList<>();
@@ -82,14 +86,15 @@ public class MainController {
 
     @FXML
     private void searchRecipes() throws IOException {
-        //clear previous search
-        clearSearch();
-
         //get data from seach form
         String searchQuery = searchTextField.getText();
         String mealType = typeCombobox.getValue();
         int calories = (int) caloriesSlider.getValue();
         boolean isVegan = checkVegan.isSelected();
+
+        //clear previous search
+        clearSearch();
+        initialSentence.setVisible(false);
 
         //perform query in api and generate search cards UI
         searchResults = RecipeSearchService.fetchSearchResults(searchQuery, mealType, calories, isVegan);

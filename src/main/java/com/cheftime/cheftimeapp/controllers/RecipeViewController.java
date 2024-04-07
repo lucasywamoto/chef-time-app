@@ -64,7 +64,7 @@ public class RecipeViewController implements Initializable {
         for (String ingredient : recipe.getIngredients()) {
             htmlContent += "<li> " + ingredient + "</li>";
         }
-        htmlContent += "</ul><br><h2>Instructions</h2>" + recipe.getInstructions();
+        htmlContent += "</ul><h2>Instructions</h2>" + recipe.getInstructions();
         htmlContent += "</body></html>";
         return htmlContent;
     }
