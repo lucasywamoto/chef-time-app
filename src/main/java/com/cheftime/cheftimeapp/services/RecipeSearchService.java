@@ -6,14 +6,8 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
-import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.URLEncoder;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -52,27 +46,11 @@ public class RecipeSearchService {
         apiUrlBuilder.append("&number=12");
 
         String apiUrl = apiUrlBuilder.toString();
-
         System.out.println(apiUrl);
-
-        try {
-            URI uri = new URI(apiUrl);
-            HttpClient httpClient = HttpClient.newHttpClient();
-            HttpRequest httpRequest = HttpRequest.newBuilder()
-                    .uri(uri)
-                    .GET()
-                    .build();
-
-            HttpResponse<String> httpResponse = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
-
-            if (httpResponse.statusCode() == 200) {
-                String responseBody = httpResponse.body();
-                parseSearchResults(responseBody, searchResults);
-            } else {
-                System.out.println("Error: " + httpResponse.statusCode());
-            }
-        } catch (URISyntaxException | IOException | InterruptedException e) {
-            e.printStackTrace();
+        ApiHttpClient apiHttpClient = new ApiHttpClient();
+        String responseBody = apiHttpClient.fetchData(apiUrl);
+        if (responseBody != null) {
+            parseSearchResults(responseBody, searchResults);
         }
         return searchResults;
     }
@@ -127,24 +105,10 @@ public class RecipeSearchService {
 
         System.out.println(apiUrl);
 
-        try {
-            URI uri = new URI(apiUrl);
-            HttpClient httpClient = HttpClient.newHttpClient();
-            HttpRequest httpRequest = HttpRequest.newBuilder()
-                    .uri(uri)
-                    .GET()
-                    .build();
-
-            HttpResponse<String> httpResponse = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
-
-            if (httpResponse.statusCode() == 200) {
-                String responseBody = httpResponse.body();
-                parseRecipeInfo(responseBody, recipe);
-            } else {
-                System.out.println("Error: " + httpResponse.statusCode());
-            }
-        } catch (URISyntaxException | IOException | InterruptedException e) {
-            e.printStackTrace();
+        ApiHttpClient apiHttpClient = new ApiHttpClient();
+        String responseBody = apiHttpClient.fetchData(apiUrl);
+        if (responseBody != null) {
+            parseRecipeInfo(responseBody, recipe);
         }
     }
 

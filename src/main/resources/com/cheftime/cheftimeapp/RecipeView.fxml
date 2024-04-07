@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.web.WebView?>
+
+<AnchorPane fx:id="recipeViewPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #D9EDBF;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cheftime.cheftimeapp.controllers.RecipeViewController">
+   <children>
+      <AnchorPane layoutX="50.0" layoutY="77.0" prefHeight="530.0" prefWidth="800.0" style="-fx-background-color: #ffffff; -fx-background-radius: 32 32 0 0; -fx-border-radius: 32 32 0 0;">
+         <children>
+            <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hmax="0.0" layoutX="50.0" layoutY="40.0" prefHeight="485.0" prefWidth="700.0" style="-fx-background-color: transparent; -fx-background-insets: 0;">
+               <content>
+                  <VBox alignment="TOP_CENTER" prefWidth="700.0" spacing="24.0" style="-fx-background-color: #ffffff;">
+                     <children>
+                        <FlowPane columnHalignment="CENTER" hgap="32.0" maxWidth="700.0" minWidth="600.0" prefHeight="120.0" prefWidth="700.0" rowValignment="TOP">
+                           <children>
+                              <Text fx:id="recipeTitle" fill="#124939" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-line-spacing: -18px;" text="Title" wrappingWidth="500.0" />
+                              <VBox alignment="CENTER" maxHeight="120.0" maxWidth="120.0" prefHeight="120.0" prefWidth="120.0" spacing="4.0" style="-fx-background-radius: 12; -fx-background-color: #ff9800;">
+                                 <children>
+                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Health Score" textAlignment="CENTER" />
+                                    <Text fx:id="healthScoreText" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="99" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </FlowPane>
+                        <WebView fx:id="contentWebView" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="600.0" VBox.vgrow="ALWAYS">
+                           <VBox.margin>
+                              <Insets bottom="64.0" right="24.0" />
+                           </VBox.margin></WebView>
+                     </children>
+                  </VBox>
+               </content>
+            </ScrollPane>
+         </children>
+      </AnchorPane>
+      <Button fx:id="backBtn" layoutX="34.0" layoutY="16.0" mnemonicParsing="false" onAction="#handleBackButtonClick" style="-fx-background-color: none;" text="Back" textFill="#124939">
+         <graphic>
+            <ImageView fitHeight="39.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/arrow.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

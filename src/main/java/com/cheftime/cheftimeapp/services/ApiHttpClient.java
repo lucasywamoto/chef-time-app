@@ -1,11 +1,10 @@
-package com.cheftime.cheftimeapp;
+package com.cheftime.cheftimeapp.services;
 
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.util.List;
 
 public class ApiHttpClient {
     public String fetchData(String url) {
@@ -23,10 +22,5 @@ public class ApiHttpClient {
             System.err.println("Failed to fetch data due to network issues.");
             return null;
         }
-    }
-
-    //method to parse json to java object
-    public List<Recipe> parseJsonPosts(String jsonString) {
-        return null;
     }
 }
