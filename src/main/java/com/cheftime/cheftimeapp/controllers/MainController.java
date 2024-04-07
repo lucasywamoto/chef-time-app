@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
@@ -54,10 +55,13 @@ public class MainController {
     private ScrollPane resultScrollPane;
 
     @FXML
-    private Text initialSentence;
+    public StackPane messageContainer;
 
     @FXML
-    private VBox resultVBox;
+    private Text message;
+
+    @FXML
+    public VBox resultVBox;
 
     private List<Recipe> searchResults = new ArrayList<>();
 
@@ -94,7 +98,6 @@ public class MainController {
 
         //clear previous search
         clearSearch();
-        initialSentence.setVisible(false);
 
         //perform query in api and generate search cards UI
         searchResults = RecipeSearchService.fetchSearchResults(searchQuery, mealType, calories, isVegan);
@@ -103,6 +106,7 @@ public class MainController {
 
     //insert result cards in search results pane (keep it as a separate method to simplify showing results when back from recipe view)
     public void displaySearchResults() throws IOException {
+        resultVBox.getChildren().remove(messageContainer);
         resultVBox.getChildren().addAll(ViewNavigator.getResultCards());
     }
 

@@ -91,10 +91,10 @@
                         <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
                      </padding>
                      <children>
-                        <StackPane translateY="200.0">
+                        <StackPane fx:id="messageContainer" translateY="200.0">
                            <children>
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="TRANSPARENT" height="80.0" stroke="#ff9800" strokeDashArray="10,5" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeMiterLimit="20.0" style="-fx-arc-height: 24; -fx-arc-width: 24;" width="320.0" />
-                              <Text fx:id="initialSentence" fill="#ff9800" strokeType="OUTSIDE" strokeWidth="0.0" text="Search for awesome recipes!" textAlignment="CENTER" wrappingWidth="400.0" />
+                              <Text fx:id="message" fill="#ff9800" strokeType="OUTSIDE" strokeWidth="0.0" text="Search for awesome recipes!" textAlignment="CENTER" wrappingWidth="400.0" />
                            </children>
                         </StackPane>
                      </children>
