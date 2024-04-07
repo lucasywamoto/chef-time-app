@@ -15,6 +15,7 @@ import javafx.util.Duration;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class MainController {
 
@@ -70,6 +71,7 @@ public class MainController {
         caloriesSlider.setMin(0);
         caloriesSlider.setMax(1200);
 
+        //show calories if user set value > 0
         caloriesSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
             if(newValue.intValue() > 0)
                 maxCaloriesLabel.setText("Maximum calories: " + newValue.intValue());
@@ -80,36 +82,47 @@ public class MainController {
 
     @FXML
     private void searchRecipes() throws IOException {
-        resultVBox.getChildren().clear();
-        ViewNavigator.getResultCards().clear();
-        resultScrollPane.setVvalue(0.0);
+        //clear previous search
+        clearSearch();
 
+        //get data from seach form
         String searchQuery = searchTextField.getText();
         String mealType = typeCombobox.getValue();
         int calories = (int) caloriesSlider.getValue();
         boolean isVegan = checkVegan.isSelected();
 
+        //perform query in api and generate search cards UI
         searchResults = RecipeSearchService.fetchSearchResults(searchQuery, mealType, calories, isVegan);
-        clearForm();
         generateResulCards(searchResults);
     }
 
+    //insert result cards in search results pane (keep it as a separate method to simplify showing results when back from recipe view)
     public void displaySearchResults() throws IOException {
         resultVBox.getChildren().addAll(ViewNavigator.getResultCards());
     }
 
     private void generateResulCards(List<Recipe> searchResults) throws IOException {
+        //populate resultCards list for each instance of Recipe from search
+        List<AnchorPane> resultCards = searchResults.parallelStream()
+                .map(recipe -> {
+                    try {
+                        FXMLLoader loader = new FXMLLoader(Application.class.getResource("/com/cheftime/cheftimeapp/SearchCard.fxml"));
+                        AnchorPane resultCard = loader.load();
+                        SearchCardController searchCardController = loader.getController();
+                        searchCardController.setRecipe(recipe);
+                        return resultCard;
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return null;
+                    }
+                })
+                .filter(Objects::nonNull)
+                .toList();
 
-        for (Recipe r : searchResults) {
-            FXMLLoader loader = new FXMLLoader(Application.class.getResource("/com/cheftime/cheftimeapp/SearchCard.fxml"));
-            AnchorPane resultCard = loader.load();
-            SearchCardController searchCardController = loader.getController();
-            searchCardController.setRecipe(r);
-            ViewNavigator.getResultCards().add(resultCard);
-        }
-
+        ViewNavigator.getResultCards().addAll(resultCards);
         displaySearchResults();
 
+        //animation to load search result cards
         int delay = 200;
         for (int i = 0; i < ViewNavigator.getResultCards().size(); i++) {
             final int index = i;
@@ -128,10 +141,16 @@ public class MainController {
         }
     }
 
-    public void clearForm() {
+    public void clearSearch() {
+        //clear form
         searchTextField.clear();
         typeCombobox.getSelectionModel().clearSelection();
         caloriesSlider.setValue(0);
         checkVegan.setSelected(false);
+        //clear search content
+        resultVBox.getChildren().clear();
+        ViewNavigator.getResultCards().clear();
+        //return to top of scroll pane
+        resultScrollPane.setVvalue(0.0);
     }
 }

@@ -16,40 +16,47 @@ import java.util.Map;
 
 public class RecipeSearchService {
 
+    //api key
     private static final String APP_KEY = "3c80d4ac04a945ef9da3ea819a5ffe22";
 
+    //perform query in api using form data from search form
     public static List<Recipe> fetchSearchResults(String searchQuery, String mealType, int calories, boolean isVegan) throws UnsupportedEncodingException {
         List<Recipe> searchResults = new ArrayList<>();
+        //encode search text to handle spaces
         String encodedSearchQuery = URLEncoder.encode(searchQuery, StandardCharsets.UTF_8);
 
+        //build api url
         StringBuilder apiUrlBuilder = new StringBuilder("https://api.spoonacular.com/recipes/complexSearch?");
+        //add api key
         apiUrlBuilder.append("apiKey=").append(APP_KEY);
-
+        //add search text
         apiUrlBuilder.append("&query=").append(encodedSearchQuery);
-
-        StringBuilder includeIngredientsBuilder = new StringBuilder();
-
+        //add meal type if chosen
         if (mealType != null && !mealType.isEmpty()) {
             mealType = URLEncoder.encode(mealType, "UTF-8");
             apiUrlBuilder.append("&mealType=").append(mealType);
         }
-
+        //add calories if set > 0
         if (calories > 0) {
             apiUrlBuilder.append("&maxCalories=").append(calories);
         }
-
+        //add vegan is checkbox is true
         if (isVegan) {
             apiUrlBuilder.append("&diet=vegan");
         }
-
+        //request nutrition information and a maximum of 12 results
         apiUrlBuilder.append("&addRecipeNutrition=true");
         apiUrlBuilder.append("&number=12");
 
+        //string builder to string
         String apiUrl = apiUrlBuilder.toString();
         System.out.println(apiUrl);
+
+        //call http client to perform request in api
         ApiHttpClient apiHttpClient = new ApiHttpClient();
         String responseBody = apiHttpClient.fetchData(apiUrl);
         if (responseBody != null) {
+            //parse response
             parseSearchResults(responseBody, searchResults);
         }
         return searchResults;
@@ -57,11 +64,13 @@ public class RecipeSearchService {
 
     private static void parseSearchResults(String responseBody, List<Recipe> searchResults) {
         Gson gson = new Gson();
+        //JSON string to JSON object
         JsonObject jsonObject = gson.fromJson(responseBody, JsonObject.class);
 
         if (jsonObject.has("results")) {
             JsonArray resultsArray = jsonObject.getAsJsonArray("results");
 
+            //accessing each element and generating a recipe object
             for (JsonElement resultElement : resultsArray) {
                 JsonObject resultObject = resultElement.getAsJsonObject();
                 String id = resultObject.get("id").getAsString();
@@ -96,6 +105,7 @@ public class RecipeSearchService {
         }
     }
 
+    //method to call api and request individual recipe ingredients and instruction
     public static void getRecipeInfo(Recipe recipe) {
         String id = recipe.getId();
 
@@ -112,6 +122,7 @@ public class RecipeSearchService {
         }
     }
 
+    //parsing response from getRecipeInfo
     public static void parseRecipeInfo(String responseBody, Recipe recipe) {
         Gson gson = new Gson();
         JsonObject jsonObject = gson.fromJson(responseBody, JsonObject.class);

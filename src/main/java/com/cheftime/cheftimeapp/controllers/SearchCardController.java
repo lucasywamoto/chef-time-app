@@ -43,6 +43,7 @@ public class SearchCardController {
 
     private Recipe recipe;
 
+    //assign data for each recipe in search result for its respective card for UI
     public void setRecipe(Recipe recipe) {
         this.recipe = recipe;
 
@@ -74,6 +75,7 @@ public class SearchCardController {
         fatText.setText("• Fat " + recipe.getFat().substring(0, indexOfDot));
     }
 
+    //handle action for switching to recipe view and see recipe instructions
     @FXML
     private void handleButtonClick() throws IOException {
         ViewNavigator.loadRecipeView(recipe);

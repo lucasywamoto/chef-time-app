@@ -23,6 +23,7 @@ public class Recipe {
 
     }
 
+    //recipe object constructor
     public Recipe(String id, String title, String calories, String imageLink, String servings, String prepTime, String protein, String carb, String fat, String healthScore) {
         this.id = id;
         this.title = title;
@@ -36,6 +37,7 @@ public class Recipe {
         this.healthScore = healthScore;
     }
 
+    //getters and setters
     public String getId() {
         return id;
     }
@@ -132,6 +134,15 @@ public class Recipe {
         this.instructions = prepSteps;
     }
 
+    public List<String> getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(List<String> ingredients) {
+        this.ingredients = ingredients;
+    }
+
+    //hash code and equals for good practice purpose
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -145,13 +156,5 @@ public class Recipe {
     @Override
     public int hashCode() {
         return id.hashCode();
-    }
-
-    public List<String> getIngredients() {
-        return ingredients;
-    }
-
-    public void setIngredients(List<String> ingredients) {
-        this.ingredients = ingredients;
     }
 }

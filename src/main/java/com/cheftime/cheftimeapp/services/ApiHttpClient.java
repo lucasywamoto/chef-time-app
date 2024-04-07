@@ -7,6 +7,8 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
 public class ApiHttpClient {
+
+    //perform api request and return response body
     public String fetchData(String url) {
         try {
             java.net.http.HttpClient client = java.net.http.HttpClient.newHttpClient();

@@ -47,6 +47,7 @@ public class RecipeViewController implements Initializable {
 
     @FXML
     private void updateRecipeView() {
+        //assign data to the currently displayed recipe
         recipeTitle.setText(recipe.getTitle());
         healthScoreText.setText(recipe.getHealthScore());
 
@@ -56,6 +57,7 @@ public class RecipeViewController implements Initializable {
         contentWebView.getEngine().loadContent(htmlContent);
     }
 
+    //recipe instructions response come as HTML code, so they need to be manipulated and shown with a webview component
     private String getHtmlContent() {
         String htmlContent = "<html><head><style>body { font-family: 'Poppins Light'; } a { pointer-events: none; cursor: default; color: inherit; text-decoration: none; }</style></head><body>" + recipe.getSummary();
         htmlContent += "<br><h2>Ingredients</h2><ul>";
@@ -69,11 +71,13 @@ public class RecipeViewController implements Initializable {
 
     @FXML
     private void handleBackButtonClick() throws IOException {
+        //action for button to go back to main view
         ViewNavigator.loadMainView();
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        //set the webview the same height as its content
         WebEngine webEngine = contentWebView.getEngine();
         webEngine.getLoadWorker().stateProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue == Worker.State.SUCCEEDED) {

@@ -23,6 +23,7 @@ public class ViewNavigator {
         mainStage = stage;
     }
 
+    //load and instance controller Recipe View
     public static void loadRecipeView(Recipe recipe) throws IOException {
         FXMLLoader loader = new FXMLLoader(Application.class.getResource("/com/cheftime/cheftimeapp/RecipeView.fxml"));
         Parent recipeViewPane = loader.load();
@@ -34,7 +35,7 @@ public class ViewNavigator {
         mainStage.setScene(recipeViewScene);
     }
 
-
+    //load and instance controller Main View
     public static void loadMainView() throws IOException {
         FXMLLoader loader = new FXMLLoader(Application.class.getResource("/com/cheftime/cheftimeapp/MainView.fxml"));
         Parent mainViewPane = loader.load();
@@ -46,6 +47,7 @@ public class ViewNavigator {
         mainStage.setScene(mainViewScene);
     }
 
+    //resultCards is maintained by this class so user can see them again after going back from recipe view
     public static List<AnchorPane> getResultCards() {
         return resultCards;
     }
